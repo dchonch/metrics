@@ -8,7 +8,7 @@ on:
 jobs:
   stale:
     name: Flag stale issues and pull requests
-    runs-on: ubuntu-latest
+    runs-on: avrea-ubuntu-latest-2-vcpu
     steps:
       - uses: actions/stale@v6
         with:
@@ -23,7 +23,7 @@ jobs:
     name: Lock inactive closed issues and pull requests
     needs:
       - stale
-    runs-on: ubuntu-latest
+    runs-on: avrea-ubuntu-latest-2-vcpu
     steps:
       - uses: dessant/lock-threads@v4
         with:
@@ -36,7 +36,7 @@ jobs:
           add-pr-labels: ☑️ archived
   workflows:
     name: Remove expired workflow runs
-    runs-on: ubuntu-latest
+    runs-on: avrea-ubuntu-latest-2-vcpu
     continue-on-error: true
     steps:
       - name: Checkout repository
