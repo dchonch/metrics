@@ -15,7 +15,7 @@ jobs:
   # Format code
   format:
     name: Format code
-    runs-on: ubuntu-latest
+    runs-on: avrea-ubuntu-latest-2-vcpu
     needs: [ build-test-analyze ]
     if: always() && (needs.build-test-analyze.result == 'success' || needs.build-test-analyze.result == 'skipped')
     steps:
@@ -43,7 +43,7 @@ jobs:
   # Update plugins and template indexes, along with README.md
   update-indexes:
     name: Publish rebuilt metrics indexes
-    runs-on: ubuntu-latest
+    runs-on: avrea-ubuntu-latest-2-vcpu
     needs: [ format ]
     steps:
       - name: Checkout repository
@@ -66,7 +66,7 @@ jobs:
   # Rebase main branch on master
   update-main:
     name: Rebase main on master
-    runs-on: ubuntu-latest
+    runs-on: avrea-ubuntu-latest-2-vcpu
     needs: [ update-indexes ]
     steps:
       - name: Checkout repository
@@ -89,7 +89,7 @@ jobs:
   # Build docker image from master and publish it to GitHub registry
   docker-master:
     name: Publish master to GitHub registry
-    runs-on: ubuntu-latest
+    runs-on: avrea-ubuntu-latest-2-vcpu
     needs: [ update-indexes ]
     steps:
       - name: Checkout repository
@@ -119,7 +119,7 @@ jobs:
   # Deploy to beta-metrics.lecoq.io
   deploy-master:
     name: Deploy lowlighter/metrics@master
-    runs-on: ubuntu-latest
+    runs-on: avrea-ubuntu-latest-2-vcpu
     needs: [ docker-master ]
     steps:
       - name: Deploy web instance
@@ -132,7 +132,7 @@ jobs:
   # Test lowlighter/metrics@master
   action-master-test:
     name: Test lowlighter/metrics@master
-    runs-on: ubuntu-latest
+    runs-on: avrea-ubuntu-latest-2-vcpu
     needs: [ docker-master ]
     steps:
       - name: Run tests
@@ -173,7 +173,7 @@ jobs:
   # Build docker image from master and publish it to GitHub registry with release tag
   docker-release:
     name: Publish release to GitHub registry
-    runs-on: ubuntu-latest
+    runs-on: avrea-ubuntu-latest-2-vcpu
     needs: [ publish-examples ]
     if: contains(github.event.head_commit.message, '[release]')
     steps:
@@ -199,7 +199,7 @@ jobs:
   # Rebase latest branch on master
   update-latest:
     name: Rebase latest on master
-    runs-on: ubuntu-latest
+    runs-on: avrea-ubuntu-latest-2-vcpu
     needs: [ docker-release ]
     steps:
       - name: Checkout repository
@@ -224,7 +224,7 @@ jobs:
   # Test lowlighter/metrics@latest
   action-latest-test:
     name: Test lowlighter/metrics@latest
-    runs-on: ubuntu-latest
+    runs-on: avrea-ubuntu-latest-2-vcpu
     needs: [ update-latest ]
     steps:
       - name: Run tests
@@ -239,7 +239,7 @@ jobs:
   # Deploy to metrics.lecoq.io
   deploy-latest:
     name: Deploy lowlighter/metrics@latest
-    runs-on: ubuntu-latest
+    runs-on: avrea-ubuntu-latest-2-vcpu
     needs: [ docker-release, deploy-master ]
     steps:
       - name: Deploy web instance
@@ -252,7 +252,7 @@ jobs:
   # Publish GitHub release
   publish-release:
     name: Publish release
-    runs-on: ubuntu-latest
+    runs-on: avrea-ubuntu-latest-2-vcpu
     needs: [ action-latest-test, deploy-latest ]
     steps:
       - name: Checkout repository

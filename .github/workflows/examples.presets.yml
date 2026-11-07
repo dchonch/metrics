@@ -6,7 +6,7 @@ on:
   workflow_call:
 jobs:
   examples:
-    runs-on: ubuntu-latest
+    runs-on: avrea-ubuntu-latest-2-vcpu
     if: "github.repository == 'lowlighter/metrics'"
     steps:
       - name: Checkout repository

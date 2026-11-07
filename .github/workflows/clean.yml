@@ -9,7 +9,7 @@ on:
 jobs:
   clean:
     name: Clean untagged docker images
-    runs-on: ubuntu-latest
+    runs-on: avrea-ubuntu-latest-2-vcpu
     continue-on-error: true
     steps:
       - name: Checkout repository
