@@ -10,7 +10,7 @@ jobs:
   # Run linter to ensure new code respect coding rules
   lint:
     name: Lint code
-    runs-on: ubuntu-latest
+    runs-on: avrea-ubuntu-latest-2-vcpu
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -32,7 +32,7 @@ jobs:
   # Build docker image from branch and run tests
   build:
     name: Build and test
-    runs-on: ubuntu-latest
+    runs-on: avrea-ubuntu-latest-2-vcpu
     needs: [ lint ]
     steps:
       - name: Checkout repository
@@ -54,7 +54,7 @@ jobs:
   # Run CodeQL on branch
   analyze:
     name: Analyze code
-    runs-on: ubuntu-latest
+    runs-on: avrea-ubuntu-latest-2-vcpu
     needs: [ lint ]
     steps:
       - name: Checkout repository
