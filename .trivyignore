@@ -1,0 +1,2 @@
+# Docker-based GitHub Actions run as root to write to the mounted workspace (upstream design)
+DS-0002

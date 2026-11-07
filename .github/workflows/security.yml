@@ -9,6 +9,8 @@ on:
 jobs:
   security:
     uses: dchonch/actions/.github/workflows/security.yml@main
+    with:
+      trivyignore: true
     permissions:
       contents: read
       pull-requests: read
